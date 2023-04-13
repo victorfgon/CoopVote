@@ -8,61 +8,99 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-    @Table(name = "pautas")
-    public class Pauta {
+@Table(name = "pautas")
+public class Pauta {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+    @NotNull
+    private String titulo;
 
-        @NotNull
-        private String titulo;
+    private String descricao;
 
-        private String descricao;
+    @OneToMany(
+            mappedBy = "pauta",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Voto> votos = new ArrayList<>();
 
-        @OneToMany(
-                mappedBy = "pauta",
-                cascade = CascadeType.ALL,
-                orphanRemoval = true
-        )
-        private List<Voto> votos = new ArrayList<>();
+    private LocalDateTime inicioSessao;
 
-        private LocalDateTime inicioSessao;
+    private LocalDateTime fimSessao;
 
-        private LocalDateTime fimSessao;
+    public Pauta() {
+    }
 
-        public Pauta() {
-        }
+    public Pauta(String titulo, String descricao) {
+        this.titulo = titulo;
+        this.descricao = descricao;
+    }
 
-        public Pauta(String titulo, String descricao) {
-            this.titulo = titulo;
-            this.descricao = descricao;
-        }
+    public Long getId() {
+        return id;
+    }
 
-        // Getters e Setters omitidos
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-        public void addVoto(Voto voto) {
-            votos.add(voto);
-            voto.setPauta(this);
-        }
+    public String getTitulo() {
+        return titulo;
+    }
 
-        public void removeVoto(Voto voto) {
-            votos.remove(voto);
-            voto.setPauta(null);
-        }
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
 
-        // Métodos para controle do tempo de sessão de votação
-        public void iniciarSessao() {
-            this.inicioSessao = LocalDateTime.now();
-            this.fimSessao = this.inicioSessao.plusMinutes(1); // Tempo padrão de 1 minuto para votação
-        }
+    public String getDescricao() {
+        return descricao;
+    }
 
-        public void iniciarSessao(Integer duracaoEmMinutos) {
-            this.inicioSessao = LocalDateTime.now();
-            this.fimSessao = this.inicioSessao.plusMinutes(duracaoEmMinutos);
-        }
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
-        public boolean sessaoEncerrada() {
-            return LocalDateTime.now().isAfter(fimSessao);
-        }
+    public List<Voto> getVotos() {
+        return votos;
+    }
+
+    public void setVotos(List<Voto> votos) {
+        this.votos = votos;
+    }
+
+    public LocalDateTime getInicioSessao() {
+        return inicioSessao;
+    }
+
+    public void setInicioSessao(LocalDateTime inicioSessao) {
+        this.inicioSessao = inicioSessao;
+    }
+
+    public LocalDateTime getFimSessao() {
+        return fimSessao;
+    }
+
+    public void setFimSessao(LocalDateTime fimSessao) {
+        this.fimSessao = fimSessao;
+    }
+
+    public void addVoto(Voto voto) {
+        votos.add(voto);
+        voto.setPauta(this);
+    }
+
+    public void removeVoto(Voto voto) {
+        votos.remove(voto);
+        voto.setPauta(null);
+    }
+
+    public boolean sessaoEncerrada() {
+        return LocalDateTime.now().isAfter(fimSessao);
+    }
+
+    public boolean sessaoAberta() {
+        return inicioSessao != null && !sessaoEncerrada();
+    }
 }
