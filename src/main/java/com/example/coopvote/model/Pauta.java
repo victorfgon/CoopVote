@@ -1,106 +1,85 @@
 package com.example.coopvote.model;
 
-import jakarta.persistence.*;
-import org.jetbrains.annotations.NotNull;
-
+import io.swagger.annotations.ApiModelProperty;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "pautas")
-public class Pauta {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+import com.example.coopvote.dto.PautaDto;
 
-    @NotNull
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+
+@Document(collection = "pautas")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Pauta {
+
+    @Id
+    @ApiModelProperty(notes = "Identificador único da pauta", example = "609027d548c1b43691d9a9ac")
+    private String id;
+
+    @NotBlank
+    @ApiModelProperty(notes = "Título da pauta", example = "Reforma do Estatuto")
     private String titulo;
 
+    @NotBlank
+    @ApiModelProperty(notes = "Descrição da pauta", example = "Aprovação da reforma do estatuto da empresa")
     private String descricao;
 
-    @OneToMany(
-            mappedBy = "pauta",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
     private List<Voto> votos = new ArrayList<>();
 
+    @PastOrPresent
+    @ApiModelProperty(notes = "Data e hora de início da sessão", example = "2022-10-10T10:00:00")
     private LocalDateTime inicioSessao;
 
+    @NotNull
+    @Future
+    @ApiModelProperty(notes = "Data e hora de término da sessão", example = "2022-10-10T11:00:00")
     private LocalDateTime fimSessao;
 
-    public Pauta() {
-    }
+    @ApiModelProperty(notes = "Resultado da votação", example = "Pauta rejeitada com 1 votos não e 0 votos sim")
+    private String resultadoVotacao;
 
-    public Pauta(String titulo, String descricao) {
-        this.titulo = titulo;
-        this.descricao = descricao;
-    }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public List<Voto> getVotos() {
-        return votos;
-    }
-
-    public void setVotos(List<Voto> votos) {
-        this.votos = votos;
-    }
-
-    public LocalDateTime getInicioSessao() {
-        return inicioSessao;
-    }
-
-    public void setInicioSessao(LocalDateTime inicioSessao) {
-        this.inicioSessao = inicioSessao;
-    }
-
-    public LocalDateTime getFimSessao() {
-        return fimSessao;
-    }
-
-    public void setFimSessao(LocalDateTime fimSessao) {
-        this.fimSessao = fimSessao;
+    public Pauta(PautaDto pautaDto) {
+        this.titulo = pautaDto.getTitulo();
+        this.descricao = pautaDto.getDescricao();
     }
 
     public void addVoto(Voto voto) {
         votos.add(voto);
-        voto.setPauta(this);
     }
 
     public void removeVoto(Voto voto) {
         votos.remove(voto);
-        voto.setPauta(null);
     }
 
     public boolean sessaoEncerrada() {
         return LocalDateTime.now().isAfter(fimSessao);
     }
 
-    public boolean sessaoAberta() {
-        return inicioSessao != null && !sessaoEncerrada();
+    public void iniciarSessao() {
+        this.inicioSessao = LocalDateTime.now();
+        this.fimSessao = this.inicioSessao.plusMinutes(1);
     }
+
+    public void iniciarSessao(long duracaoEmMinutos) {
+        LocalDateTime now = LocalDateTime.now();
+        this.inicioSessao = now;
+        this.fimSessao = now.plusMinutes(duracaoEmMinutos);
+    }
+
 }

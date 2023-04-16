@@ -1,57 +1,36 @@
 package com.example.coopvote.model;
 
-import jakarta.persistence.*;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "voto")
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Document(collection = "votos")
+@ApiModel(description = "Classe que representa um voto")
 public class Voto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @ApiModelProperty(value = "Identificador único do voto", example = "609027d548c1b43691d9a9ac")
+    private String id;
 
-    @Column(name = "associado_id", nullable = false)
-    private Long associadoId;
+    @NotBlank(message = "O ID da pauta não pode estar em branco")
+    @ApiModelProperty(value = "Identificador único da pauta associada ao voto", example = "609027d548c1b43691d9a9ac")
+    private String idPauta;
 
-    @Column(name = "voto", nullable = false)
-    private String voto;
+    @NotBlank(message = "O CPF do votante não pode estar em branco")
+    @ApiModelProperty(value = "CPF do votante", example = "12345678901")
+    private String cpf;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "pauta_id", nullable = false)
-    private Pauta pauta;
-
-    // Getters e setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getAssociadoId() {
-        return associadoId;
-    }
-
-    public void setAssociadoId(Long associadoId) {
-        this.associadoId = associadoId;
-    }
-
-    public String getVoto() {
-        return voto;
-    }
-
-    public void setVoto(String voto) {
-        this.voto = voto;
-    }
-
-    public Pauta getPauta() {
-        return pauta;
-    }
-
-    public void setPauta(Pauta pauta) {
-        this.pauta = pauta;
-    }
-
+    @NotNull(message = "O voto não pode ser nulo")
+    @ApiModelProperty(value = "Valor booleano que representa o voto (true = Sim, false = Não)", example = "true")
+    private Boolean voto;
 }
