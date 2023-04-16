@@ -22,7 +22,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-public class PautaControllerTest {
+class PautaControllerTest {
 
     @Mock
     private PautaService pautaService;
@@ -36,7 +36,7 @@ public class PautaControllerTest {
     }
 
     @Test
-    public void testCriarPauta() {
+     void testCriarPauta() {
         PautaDto pautaDto = new PautaDto();
         pautaDto.setTitulo("Teste");
         Pauta novaPauta = new Pauta();
@@ -49,7 +49,7 @@ public class PautaControllerTest {
     }
 
     @Test
-    public void testBuscarPorId() {
+     void testBuscarPorId() {
         String id = "1";
         Pauta pauta = new Pauta();
         pauta.setId(id);
@@ -60,7 +60,7 @@ public class PautaControllerTest {
     }
 
     @Test
-    public void testBuscarTodas() {
+     void testBuscarTodas() {
         List<Pauta> pautas = new ArrayList<>();
         Pauta pauta1 = new Pauta();
         pauta1.setId("1");
@@ -77,14 +77,14 @@ public class PautaControllerTest {
     }
 
     @Test
-    public void testRemoverPauta() {
+     void testRemoverPauta() {
         String id = "1";
         ResponseEntity<Void> responseEntity = pautaController.removerPauta(id);
         Assertions.assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
     }
 
     @Test
-    public void testCalcularResultadoVotacaoNotFound() {
+     void testCalcularResultadoVotacaoNotFound() {
         String id = "1";
         when(pautaService.buscarPorId(anyString())).thenReturn(null);
         ResponseEntity<String> responseEntity = pautaController.calcularResultadoVotacao(id);
@@ -92,7 +92,7 @@ public class PautaControllerTest {
     }
 
     @Test
-    public void testMostrarResultadoVotacaoEncerrada() {
+     void testMostrarResultadoVotacaoEncerrada() {
         String id = "1";
         Pauta pauta = new Pauta();
         pauta.setId(id);
@@ -106,7 +106,7 @@ public class PautaControllerTest {
     }
 
     @Test
-    public void testCalcularResultadoVotacaoSessaoEmAndamento() {
+    void testCalcularResultadoVotacaoSessaoEmAndamento() {
         String id = "1";
         Pauta pauta = new Pauta();
         pauta.setId(id);
@@ -119,7 +119,7 @@ public class PautaControllerTest {
     }
 
     @Test
-    public void testCalcularResultadoVotacao() {
+    void testCalcularResultadoVotacao() {
         String id = "1";
         Pauta pauta = new Pauta();
         pauta.setId(id);

@@ -9,18 +9,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataMongoTest
-public class VotoRepositoryTest {
+class VotoRepositoryTest {
 
     @Autowired
     private VotoRepository votoRepository;
 
     @Test
-    public void testFindByIdPautaAndCpf() {
+     void testFindByIdPautaAndCpf() {
         Random rand = new Random();
         Voto voto = new Voto();
         voto.setIdPauta("id da pauta");
         voto.setCpf(Integer.toString(rand.nextInt(100000000)));
-        voto.setVoto(true);
+        voto.setVotoEscolhido(true);
         votoRepository.save(voto);
 
         Voto votoEncontrado = votoRepository.findByIdPautaAndCpf("id da pauta", voto.getCpf());

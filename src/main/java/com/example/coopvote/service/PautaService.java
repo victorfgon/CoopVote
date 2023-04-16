@@ -84,13 +84,13 @@ public class PautaService {
 
     private int contarVotosSim(Pauta pauta) {
         return (int) pauta.getVotos().stream()
-                .filter(Voto::getVoto)
+                .filter(Voto::getVotoEscolhido)
                 .count();
     }
 
     private int contarVotosNao(Pauta pauta) {
         return (int) pauta.getVotos().stream()
-                .filter(v -> !v.getVoto())
+                .filter(v -> !v.getVotoEscolhido())
                 .count();
     }
 }

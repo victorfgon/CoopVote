@@ -15,6 +15,7 @@ import java.util.Collections;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+    private static final String GITHUB = "https://github.com/victorfgon/CoopVote";
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -30,8 +31,8 @@ public class SwaggerConfig {
                 "CoopVote",
                 "API para gerenciamento de uma sessão de votação",
                 "1.0.0",
-                "https://github.com/victorfgon/CoopVote",
-                new Contact("Victor", "https://github.com/victorfgon/CoopVote", "vitocafg@gmail.com"),
-                "Licença da API", "https://github.com/victorfgon/CoopVote", Collections.emptyList());
+                GITHUB,
+                new Contact("Victor", GITHUB, "vitocafg@gmail.com"),
+                "Licença da API", GITHUB, Collections.emptyList());
     }
 }

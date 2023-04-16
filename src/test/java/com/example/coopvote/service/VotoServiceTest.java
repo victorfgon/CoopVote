@@ -1,5 +1,6 @@
 package com.example.coopvote.service;
 
+import com.example.coopvote.dto.VotoDto;
 import com.example.coopvote.exception.SessaoVotacaoEncerradaException;
 import com.example.coopvote.exception.VotoDuplicadoException;
 import com.example.coopvote.model.Pauta;
@@ -17,7 +18,7 @@ import java.time.LocalDateTime;
 
 import static org.mockito.Mockito.*;
 
-public class VotoServiceTest {
+class VotoServiceTest {
 
     @Mock
     private VotoRepository votoRepository;
@@ -33,6 +34,7 @@ public class VotoServiceTest {
 
     private Voto voto;
     private Pauta pauta;
+    private VotoDto votoDto;
 
     @BeforeEach
     void setUp() {
@@ -47,7 +49,11 @@ public class VotoServiceTest {
         voto = new Voto();
         voto.setIdPauta(pauta.getId());
         voto.setCpf("12345678910");
-        voto.setVoto(true);
+        voto.setVotoEscolhido(true);
+        votoDto = new VotoDto();
+        votoDto.setIdPauta(pauta.getId());
+        votoDto.setCpf("12345678910");
+        votoDto.setVotoEscolhido(true);
     }
 
     @Test
@@ -56,7 +62,7 @@ public class VotoServiceTest {
         when(votoRepository.findByIdPautaAndCpf(voto.getIdPauta(), voto.getCpf())).thenReturn(null);
         when(votoRepository.save(voto)).thenReturn(voto);
 
-        votoService.votar(voto);
+        votoService.votar(votoDto);
 
         verify(votoRepository, times(1)).save(voto);
         verify(pautaRepository, times(1)).save(pauta);
@@ -69,7 +75,7 @@ public class VotoServiceTest {
 
         when(pautaService.buscarPorId(voto.getIdPauta())).thenReturn(pauta);
 
-        Assertions.assertThrows(SessaoVotacaoEncerradaException.class, () -> votoService.votar(voto));
+        Assertions.assertThrows(SessaoVotacaoEncerradaException.class, () -> votoService.votar(votoDto));
         verify(votoRepository, never()).save(any(Voto.class));
         verify(pautaRepository, never()).save(any(Pauta.class));
     }
@@ -79,7 +85,7 @@ public class VotoServiceTest {
         when(pautaService.buscarPorId(voto.getIdPauta())).thenReturn(pauta);
         when(votoRepository.findByIdPautaAndCpf(voto.getIdPauta(), voto.getCpf())).thenReturn(voto);
 
-        Assertions.assertThrows(VotoDuplicadoException.class, () -> votoService.votar(voto));
+        Assertions.assertThrows(VotoDuplicadoException.class, () -> votoService.votar(votoDto));
 
         verify(votoRepository, never()).save(any(Voto.class));
         verify(pautaRepository, never()).save(any(Pauta.class));

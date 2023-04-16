@@ -1,5 +1,6 @@
 package com.example.coopvote.service;
 
+import com.example.coopvote.dto.VotoDto;
 import com.example.coopvote.exception.SessaoVotacaoEncerradaException;
 import com.example.coopvote.exception.VotoDuplicadoException;
 import com.example.coopvote.model.Pauta;
@@ -30,7 +31,8 @@ public class VotoService {
     private final Logger logger = LoggerFactory.getLogger(VotoService.class);
 
     @ApiOperation(value = "Registrar um voto em uma pauta", response = Voto.class)
-    public Voto votar(@ApiParam(value = "Objeto do tipo Voto a ser registrado", required = true)  Voto voto)  {
+    public Voto votar(@ApiParam(value = "Objeto do tipo Voto a ser registrado", required = true) VotoDto votoDto)  {
+        Voto voto = new Voto(votoDto);
         Pauta pauta = pautaService.buscarPorId(voto.getIdPauta());
         if (pauta.sessaoEncerrada()) {
             logger.error("Não é possível registrar voto para a pauta {}, pois a sessão de votação está encerrada.", pauta.getId());

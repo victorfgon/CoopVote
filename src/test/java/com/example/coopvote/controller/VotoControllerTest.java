@@ -1,5 +1,6 @@
 package com.example.coopvote.controller;
 
+import com.example.coopvote.dto.VotoDto;
 import com.example.coopvote.model.Voto;
 import com.example.coopvote.service.VotoService;
 import org.junit.jupiter.api.Assertions;
@@ -15,7 +16,7 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class VotoControllerTest {
+class VotoControllerTest {
 
     @Mock
     private VotoService votoService;
@@ -29,17 +30,18 @@ public class VotoControllerTest {
     }
 
     @Test
-    public void testVotar() {
+    void testVotar() {
         Voto voto = new Voto();
+        VotoDto votoDto = new VotoDto();
         voto.setId("1");
-        when(votoService.votar(any(Voto.class))).thenReturn(voto);
-        ResponseEntity<Voto> response = votoController.votar(voto);
+        when(votoService.votar(any(VotoDto.class))).thenReturn(voto);
+        ResponseEntity<Voto> response = votoController.votar(votoDto);
         Assertions.assertEquals(HttpStatus.CREATED, response.getStatusCode());
         Assertions.assertEquals(voto, response.getBody());
     }
 
     @Test
-    public void testBuscarTodos() {
+    void testBuscarTodos() {
         List<Voto> votos = new ArrayList<>();
         Voto voto1 = new Voto();
         voto1.setId("1");
@@ -54,7 +56,7 @@ public class VotoControllerTest {
     }
 
     @Test
-    public void testApagarTodos() {
+    void testApagarTodos() {
         ResponseEntity<Void> response = votoController.apagarTodos();
         Assertions.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }

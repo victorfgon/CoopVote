@@ -14,9 +14,8 @@ public class MongoConfig {
     @Value("${spring.data.mongodb.uri}")
     private String uri;
 
-    protected String getDatabaseName() {
-        return "coopvote";
-    }
+
+    static final String DATABASE_NAME = "coopvote";
 
     public MongoClient mongoClient() {
         return MongoClients.create(uri);
@@ -24,7 +23,7 @@ public class MongoConfig {
 
     @Bean
     public MongoTemplate mongoTemplate() {
-        return new MongoTemplate(mongoClient(), getDatabaseName());
+        return new MongoTemplate(mongoClient(), DATABASE_NAME);
     }
 
 }

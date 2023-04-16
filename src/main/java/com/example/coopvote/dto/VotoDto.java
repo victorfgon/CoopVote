@@ -1,13 +1,11 @@
-package com.example.coopvote.model;
+package com.example.coopvote.dto;
 
-import com.example.coopvote.dto.VotoDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -15,29 +13,19 @@ import javax.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "votos")
+@Builder
 @ApiModel(description = "Classe que representa um voto")
-public class Voto {
-
-    @Id
-    @ApiModelProperty(value = "Identificador único do voto", example = "609027d548c1b43691d9a9ac")
-    private String id;
-
-    @NotBlank(message = "O ID da pauta não pode estar em branco")
+public class VotoDto {
+    
     @ApiModelProperty(value = "Identificador único da pauta associada ao voto", example = "609027d548c1b43691d9a9ac")
+    @NotBlank(message = "O ID da pauta não pode estar em branco")
     private String idPauta;
 
-    @NotBlank(message = "O CPF do votante não pode estar em branco")
     @ApiModelProperty(value = "CPF do votante", example = "12345678901")
+    @NotBlank(message = "O CPF do votante não pode estar em branco")
     private String cpf;
 
-    @NotNull(message = "O voto não pode ser nulo")
     @ApiModelProperty(value = "Valor booleano que representa o voto (true = Sim, false = Não)", example = "true")
+    @NotNull(message = "O voto não pode ser nulo")
     private Boolean votoEscolhido;
-
-    public Voto(VotoDto votoDto) {
-        this.idPauta = votoDto.getIdPauta();
-        this.cpf = votoDto.getCpf();
-        this.votoEscolhido = votoDto.getVotoEscolhido();
-    }
 }

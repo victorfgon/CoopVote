@@ -1,5 +1,6 @@
 package com.example.coopvote.controller;
 
+import com.example.coopvote.dto.VotoDto;
 import com.example.coopvote.model.Voto;
 import com.example.coopvote.service.VotoService;
 import io.swagger.annotations.Api;
@@ -31,9 +32,9 @@ public class VotoController {
 
     @ApiOperation(value = "Realizar voto em uma pauta")
     @PostMapping
-    public ResponseEntity<Voto> votar(@ApiParam(value = "Dados do voto a ser realizado") @RequestBody @Valid Voto voto) {
+    public ResponseEntity<Voto> votar(@ApiParam(value = "Dados do voto a ser realizado") @RequestBody @Valid VotoDto votoDto) {
         logger.info("Recebendo solicitação para realizar voto em uma pauta.");
-        Voto novoVoto = votoService.votar(voto);
+        Voto novoVoto = votoService.votar(votoDto);
         logger.info("Voto registrado com sucesso.");
         return ResponseEntity.status(HttpStatus.CREATED).body(novoVoto);
     }

@@ -34,9 +34,9 @@ public class PautaController {
 
     @PostMapping
     @ApiOperation(value = "Cria uma nova pauta", response = Pauta.class)
-    public ResponseEntity<Pauta> criarPauta(@RequestBody @Valid PautaDto pauta) {
+    public ResponseEntity<Pauta> criarPauta(@RequestBody @Valid PautaDto pautaDto) {
         logger.info("Requisição recebida para criar uma nova pauta");
-        Pauta novaPauta = pautaService.criarPauta(pauta);
+        Pauta novaPauta = pautaService.criarPauta(pautaDto);
         logger.info("Pauta criada com sucesso com id {}", novaPauta.getId());
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
                 .buildAndExpand(novaPauta.getId()).toUri();

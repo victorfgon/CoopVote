@@ -8,10 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class PautaTest {
+class PautaTest {
 
     @Test
-    public void testSessaoEncerrada() {
+    void testSessaoEncerrada() {
         Pauta pauta = new Pauta();
         pauta.setInicioSessao(LocalDateTime.now().minusMinutes(2));
         pauta.setFimSessao(LocalDateTime.now().minusMinutes(1));
@@ -20,7 +20,7 @@ public class PautaTest {
     }
 
     @Test
-    public void testSessaoNaoEncerrada() {
+    void testSessaoNaoEncerrada() {
         Pauta pauta = new Pauta();
         pauta.setInicioSessao(LocalDateTime.now().minusMinutes(1));
         pauta.setFimSessao(LocalDateTime.now().plusMinutes(1));
@@ -29,7 +29,7 @@ public class PautaTest {
     }
 
     @Test
-    public void testIniciarSessao() {
+    void testIniciarSessao() {
         Pauta pauta = new Pauta();
         pauta.iniciarSessao();
 
@@ -39,7 +39,7 @@ public class PautaTest {
     }
 
     @Test
-    public void testIniciarSessaoWithDuration() {
+    void testIniciarSessaoWithDuration() {
         Pauta pauta = new Pauta();
         pauta.iniciarSessao(2);
 
@@ -49,11 +49,11 @@ public class PautaTest {
     }
 
     @Test
-    public void testAddRemoveVoto() {
+    void testAddRemoveVoto() {
         Pauta pauta = new Pauta();
         Voto voto = new Voto();
         voto.setCpf("12345678900");
-        voto.setVoto(true);
+        voto.setVotoEscolhido(true);
 
         pauta.addVoto(voto);
         assertEquals(1, pauta.getVotos().size());
