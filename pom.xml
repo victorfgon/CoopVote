@@ -11,7 +11,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com/example/coopvote/CoopVoteApplication.java</mainClass>
+							<mainClass>com.example.coopvote.CoopVoteApplication</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
