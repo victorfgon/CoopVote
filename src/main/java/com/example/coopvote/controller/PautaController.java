@@ -23,7 +23,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/pautas")
+@RequestMapping("/api/v1/pautas")
 @Api(value = "Pauta", tags = { "Pauta" })
 public class PautaController {
 

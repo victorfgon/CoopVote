@@ -21,7 +21,7 @@ import java.util.List;
 
 @Api(value = "Voto Controller")
 @RestController
-@RequestMapping("/votos")
+@RequestMapping("/api/v1/votos")
 public class VotoController {
 
     @Autowired
