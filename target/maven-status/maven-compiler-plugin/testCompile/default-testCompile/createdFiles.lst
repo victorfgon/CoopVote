@@ -1,8 +1,0 @@
-com\example\coopvote\controller\PautaControllerTest.class
-com\example\coopvote\CoopVoteApplicationTests.class
-com\example\coopvote\service\PautaServiceTest.class
-com\example\coopvote\repository\VotoRepositoryTest.class
-com\example\coopvote\config\MongoConfigTest.class
-com\example\coopvote\model\PautaTest.class
-com\example\coopvote\controller\VotoControllerTest.class
-com\example\coopvote\service\VotoServiceTest.class
