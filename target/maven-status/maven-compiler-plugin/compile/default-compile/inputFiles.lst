@@ -1,0 +1,17 @@
+C:\Users\Novo\Downloads\coop-vote\src\main\java\com\example\coopvote\config\SwaggerConfig.java
+C:\Users\Novo\Downloads\coop-vote\src\main\java\com\example\coopvote\repository\VotoRepository.java
+C:\Users\Novo\Downloads\coop-vote\src\main\java\com\example\coopvote\model\Pauta.java
+C:\Users\Novo\Downloads\coop-vote\src\main\java\com\example\coopvote\service\VotoService.java
+C:\Users\Novo\Downloads\coop-vote\src\main\java\com\example\coopvote\model\Voto.java
+C:\Users\Novo\Downloads\coop-vote\src\main\java\com\example\coopvote\dto\VotoDto.java
+C:\Users\Novo\Downloads\coop-vote\src\main\java\com\example\coopvote\exception\PautaNotFoundException.java
+C:\Users\Novo\Downloads\coop-vote\src\main\java\com\example\coopvote\exception\SessaoVotacaoEncerradaException.java
+C:\Users\Novo\Downloads\coop-vote\src\main\java\com\example\coopvote\repository\PautaRepository.java
+C:\Users\Novo\Downloads\coop-vote\src\main\java\com\example\coopvote\controller\TratamentoDeExcecaoController.java
+C:\Users\Novo\Downloads\coop-vote\src\main\java\com\example\coopvote\CoopVoteApplication.java
+C:\Users\Novo\Downloads\coop-vote\src\main\java\com\example\coopvote\controller\VotoController.java
+C:\Users\Novo\Downloads\coop-vote\src\main\java\com\example\coopvote\controller\PautaController.java
+C:\Users\Novo\Downloads\coop-vote\src\main\java\com\example\coopvote\exception\VotoDuplicadoException.java
+C:\Users\Novo\Downloads\coop-vote\src\main\java\com\example\coopvote\dto\PautaDto.java
+C:\Users\Novo\Downloads\coop-vote\src\main\java\com\example\coopvote\config\MongoConfig.java
+C:\Users\Novo\Downloads\coop-vote\src\main\java\com\example\coopvote\service\PautaService.java
