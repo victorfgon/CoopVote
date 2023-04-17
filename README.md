@@ -10,7 +10,7 @@ Java 17
 ,JUnit 
 
 
-#Como executar
+# Como executar
 1- Clone este repositório
 
 2- Execute o comando mvn clean package na raiz do projeto para gerar o arquivo JAR  e depois o arquivo JAR com o comando java -jar target/coop-vote-0.0.1-SNAPSHOT.jar
@@ -21,7 +21,7 @@ Java 17
 
 
 
-#Endpoints principais:
+# Endpoints principais:
 
 POST api/v1/pautas - cria uma nova pauta com o tempo escolhido
 
