@@ -1,6 +1,8 @@
 # CoopVote
 Backend para aplicativo de cooperativismo. No cooperativismo, cada associado possui um voto e as decisões são tomadas em assembleias, por votação.
 
+Obs:A tarefa bonus 1 não pode ser feita, pois o endpoint fornecido não estava funcionando.
+
 
 # Tecnologias utilizadas:
 Java 17
