@@ -28,3 +28,8 @@ POST api/v1/pautas - cria uma nova pauta com o tempo escolhido
 POST api/v1/votos - registra um novo voto para uma pauta, SIM = true, NÃO = false
 
 POST api/vi/pautas/{id}/resultado - Calcula/mostra o resultado de uma pauta encerrada
+
+
+# DNS da aplicação na nuvem:ec2-3-144-165-165.us-east-2.compute.amazonaws.com:8080
+
+Exemplo: ec2-3-144-165-165.us-east-2.compute.amazonaws.com:8080/api/v1/pautas
