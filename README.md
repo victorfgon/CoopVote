@@ -3,10 +3,10 @@ Backend para aplicativo de cooperativismo. No cooperativismo, cada associado pos
 
 Tecnologias utilizadas:
 Java 17
-Spring Boot
-MongoDB
-Swagger
-JUnit 
+,Spring Boot
+,MongoDB
+,Swagger
+,JUnit 
 
 Acesse o Swagger em http://localhost:8080/swagger-ui/#/
 
