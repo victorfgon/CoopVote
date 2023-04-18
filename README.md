@@ -37,3 +37,8 @@ POST api/vi/pautas/{id}/resultado - Calcula/mostra o resultado de uma pauta ence
 ec2-3-144-165-165.us-east-2.compute.amazonaws.com:8080
 
 Exemplo: ec2-3-144-165-165.us-east-2.compute.amazonaws.com:8080/api/v1/pautas
+
+
+# Teste de carga: 
+
+Foi feito um teste de carga com Jmeter simulando uma grande quantidade de votos a partir do endpoint "ec2-3-144-165-165.us-east-2.compute.amazonaws.com:8080/api/v1/votos". No body json do Jmeter foi feita uma função que criava um cpf aleatório para assim ser testado um cenário exagerado de 30000 votos em 5 minutos. O resultado foi que 20450 requisições com erro e 9550 com sucesso. 
