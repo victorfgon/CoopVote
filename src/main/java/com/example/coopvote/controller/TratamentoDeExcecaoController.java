@@ -22,14 +22,14 @@ public class TratamentoDeExcecaoController {
     @ExceptionHandler(VotoDuplicadoException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public String votoDuplicadoException(VotoDuplicadoException e) {
+    public String votoDuplicadoExceptionHandler(VotoDuplicadoException e) {
         return e.getMessage();
     }
 
     @ExceptionHandler(PautaNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
-    public String pautaNotFoundException(PautaNotFoundException e) {
+    public String pautaNotFoundExceptionHandler(PautaNotFoundException e) {
         return e.getMessage();
     }
 }
