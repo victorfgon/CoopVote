@@ -79,10 +79,6 @@ public class PautaController {
     public ResponseEntity<String> calcularResultadoVotacao(@PathVariable String id) {
         logger.info("Calculando resultado de votação para a pauta com id {}", id);
         Pauta pauta = pautaService.buscarPorId(id);
-        if (pauta == null) {
-            logger.warn("Não foi possível encontrar a pauta com id {}", id);
-            return ResponseEntity.notFound().build();
-        }
         if (pauta.getResultadoVotacao() != null){
             return ResponseEntity.ok(pauta.getResultadoVotacao());
         }

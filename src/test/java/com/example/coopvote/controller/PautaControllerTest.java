@@ -84,14 +84,6 @@ class PautaControllerTest {
     }
 
     @Test
-     void testCalcularResultadoVotacaoNotFound() {
-        String id = "1";
-        when(pautaService.buscarPorId(anyString())).thenReturn(null);
-        ResponseEntity<String> responseEntity = pautaController.calcularResultadoVotacao(id);
-        Assertions.assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
-    }
-
-    @Test
      void testMostrarResultadoVotacaoEncerrada() {
         String id = "1";
         Pauta pauta = new Pauta();
